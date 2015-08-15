@@ -1,26 +1,17 @@
-<?php
-/**
- * The template for displaying the footer.
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package test36
- */
-
-?>
-
 	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-        	<?php footer_text(); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
-
+	<footer class="footer" role="contentinfo">
+    	<h1>Inquiries?</h1>
+		<div class="endash">&ndash;</div>
+		<div class="footer__text"><?php footer_text(); ?></div>
+        <div class="footer__contact">
+            call: <a href="tel:+1-234-567-8910">1.234.567.8910</a><br />
+            email: <a href="mailto:jon@apexcreations.com">jon@apexcreations.com</a>
+        </div>
+		<div class="footer__fine_print">&copy; <?=date('Y')?> APEX CREATIONS. All rights reserved</div>
+		<div class="footer__up">[up]</div>
+	</footer>
+</div><!-- #wrap -->
 <?php wp_footer(); ?>
-
 </body>
 </html>
