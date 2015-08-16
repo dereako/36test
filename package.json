@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/dereako/36test/issues"
   },
-  "homepage": "http://www.derekhalldesign.com/36test"
+  "homepage": "http://www.derekhalldesign.com/36test",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }

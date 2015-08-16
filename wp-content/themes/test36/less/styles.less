@@ -1,0 +1,466 @@
+@import 'normalize';
+
+/* --------------------------------
+ *         ORIGINAL STYLES        |
+ * --------------------------------
+ */
+
+/* COLOR VARIABLES */
+@white: #fff;
+@barely: #f5f5f5;
+@light: #ccc;
+@medium: #999;
+@grey: #666;
+@dark: #333;
+
+/* FUNCTIONS */
+/** REMOVE**/
+.gradient(@start: @dark, @stop: @white, @perc: 50%) {
+	background: @stop;
+	background: -moz-linear-gradient(left, @start 0%, @stop @perc, @stop 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,@start), color-stop(@perc,@stop), color-stop(100%,@stop));
+	background: -webkit-linear-gradient(left, @start 0%,@stop @perc,@stop 100%);
+	background: -o-linear-gradient(left, @start 0%,@stop @perc,@stop 100%);
+	background: -ms-linear-gradient(left, @start 0%,@stop @perc,@stop 100%);
+	background: linear-gradient(to right, @start 0%,@stop @perc,@stop 100%);
+	filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='@d', endColorstr='@d', GradientType=1)",@start,@stop));
+}
+.rotate(@deg: 90deg) {
+	-webkit-transform: rotate(@deg);
+	-moz-transform: rotate(@deg);
+	-o-transform: rotate(@deg);
+	-ms-transform: rotate(@deg);
+	transform: rotate(@deg);
+}
+
+.transition(@property, @duration, @ease: ease, @delay: 0) {
+	-webkit-transition-property: @property;  
+	-webkit-transition-duration: @duration;
+	-webkit-transition-timing-function: @ease;
+	-webkit-transition-delay: @delay; 
+	
+	-moz-transition-property: @property;  
+	-moz-transition-duration: @duration;
+	-moz-transition-timing-function: @ease;
+	-moz-transition-delay: @delay;
+	
+	-ms-transition-property: @property;  
+	-ms-transition-duration: @duration;
+	-ms-transition-timing-function: @ease;
+	-ms-transition-delay: @delay;
+	
+	-o-transition-property: @property;  
+	-o-transition-duration: @duration;
+	-o-transition-timing-function: @ease;
+	-o-transition-delay: @delay; 
+	
+	transition-property: @property;  
+	transition-duration: @duration;
+	transition-timing-function: @ease;
+	transition-delay: @delay;
+}
+
+/* HTML TAG STYLES */
+html {
+	font-size: 100%; /* go with the default, 16px */
+	height: 100%;
+}
+body {
+	background: @white; /* Old browsers */
+	background: -moz-linear-gradient(left, @barely 0%, @barely 50%, @white 50%, @white 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,@barely), color-stop(50%,@barely), color-stop(50%,@white), color-stop(100%,@white)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, @barely 0%,@barely 50%,@white 50%,@white 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, @barely 0%,@barely 50%,@white 50%,@white 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, @barely 0%,@barely 50%,@white 50%,@white 100%); /* IE10+ */
+	background: linear-gradient(to right, @barely 0%,@barely 50%,@white 50%,@white 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@barely', endColorstr='@white',GradientType=1 ); /* IE6-9 */
+
+	color: @dark;
+	font-family: Arial, Helvetica sans-serif;
+	font-size: 16px; /* pixels fallback for no-rem browsers */
+	font-size: 1rem; /* always in relation to html, so 16/16 */
+	line-height: 1;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+
+/* UNIVERSAL STYLES */
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.clear {
+	clear: both;
+}
+
+.light {
+	color: @light;
+}
+.medium {
+	color: @medium;
+}
+.grey {
+	color: @grey;
+}
+.dark {
+	color: @dark;
+}
+
+.faded {
+	.light;
+	font-size: 18px;
+	font-size: 1.125rem;
+	&:before {
+		content: '\a';
+		white-space: pre;
+	}
+}
+.endash {
+	font-weight: bold;
+}
+
+a {
+	.transition(color, 0.2s);
+	color: @dark;
+	text-decoration: none;
+	
+	&:hover, &:focus {
+		color: @light;
+		outline: none;
+	}
+	&.faded {
+		&:hover, &:focus {
+			color: @dark;
+		}
+	}
+}
+
+hr {
+	.clear;
+	.transition(height,1s);
+	height: 9px;
+	background: #333;
+	border: none;
+	margin: 0;
+}
+h1,h2,h3,h4,h5,h6,ul,li,table {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+/* TYPOGRAPHY */
+h1,h2,h3,h4,h5,h6 {
+	text-transform: uppercase;
+}
+
+h6, .tiny {
+	font-size: 13px;
+	font-size: 0.75rem;
+}
+h5, .small, small {
+	font-size: 14px;
+	font-size: 0.875rem;
+}
+h4, .normal {
+	font-size: 16px;
+	font-size: 1rem;
+}
+h3, big, .big, .special {
+	font-size: 18px;
+	font-size: 1.125rem;
+}
+h2, .large {
+	font-size: 20px;
+	font-size: 1.25rem;
+}
+h1, .huge {
+	font-size: 30px;
+	font-size: 1.375rem;
+}
+
+
+/* BOX MODEL */
+.wrap {
+	width: 91.41%; /* 1170 / 1280 */
+	margin: 0 auto;
+}
+
+.logo__triangle {
+	width: 0; 
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 29px solid @dark;
+	left: 50%;
+	margin-left: -20px;
+	position: fixed;
+	-moz-transform: scale(.9999); /* smooths the triangle's edges in Firefox */
+	&.logo__triangle-dark {
+		top: 19px;
+		z-index: 1;
+	}
+}
+.logo__box, .logo__mobile {
+	background: @dark;
+	left: 50%;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+}
+.logo__box {
+	clip: rect(auto, auto, auto, auto);
+	height: 103px;
+	margin-left: -52.5px;
+	overflow: hidden;
+	width: 103px;
+	.logo__triangle-white {
+		border-bottom-color: @white;
+		position: absolute;
+		top: 35px;
+		z-index: 3;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		backface-visibility: hidden;
+		&.stick {
+			position: fixed;
+			top: 19px;
+		}
+	}
+}
+.logo__mobile {
+	display: none;
+	height: 63px;
+	width: 63px;
+	margin-left: -31.5px;
+	.logo__triangle-white {
+		border-left: 13px solid transparent;
+		border-right: 13px solid transparent;
+		border-bottom: 18px solid @white;
+		position: absolute;
+		margin-left: -13px;
+		top: 21px;
+	}
+}
+
+.header {
+	padding-top: 56px;
+	&.stick {
+		padding-top: 136px;
+		.navigation {
+			background: @white;
+			height: 30px;
+			position: fixed;
+			top: 0;
+		}
+		hr {
+			height: 0;
+		}
+	}
+}
+
+.navigation {
+	.transition(background,1s);
+	padding-top: 32px;
+	height: 45px;
+	width: 100%;
+	.menu-navigation-container {
+		border-spacing: 36px 0; /* unexpectedly horizontal then vertical */
+		display: table;
+		margin: 0 auto;
+		padding-right: 36px;
+		ul {
+			display: table-row;
+			li {
+				display: table-cell;
+				font-size: 13px;
+				font-size: 0.8125rem;
+				font-weight: bold;
+				list-style: none;
+				text-align: center;
+				text-transform: uppercase;
+				white-space: nowrap;
+				&:nth-child(3) a {
+					margin-right: 143px;
+				}
+				a {
+					display: block;
+					padding: 2px;
+					&:hover, &:focus {
+						color: @dark;
+					}
+				}
+			}
+		}
+	}
+}
+
+.main {
+	padding-top: 30px;
+}
+
+.footer {
+	font-size: 18px;
+	font-size: 1.125rem;
+	line-height: 1.75; /* 28 / 16 */
+	padding: 218px 0 90px;
+	.wrap {
+		box-sizing: border-box;
+		padding-right: 10%;
+		position: relative;
+	}
+	.ndash {
+		font-size: 25px;
+		font-size: 1.5625rem;
+	}
+	.footer__text {
+		p {
+			margin-top: 0;
+		}
+	}
+	.footer__fine_print {
+		.rotate(-90deg);
+		color: @medium;
+		float: right;
+		font-size: 11px;
+		font-size: 0.6875rem;
+		position: absolute;
+		right: 15px;
+		top: 9px;
+	    transform-origin: 100% 0;
+	}
+	.footer__up {
+		.transition(color, 0.2s);
+		cursor: pointer;
+		position: absolute;
+		right: 0;
+		top: -95px;
+		&:hover, :focus {
+			color: @dark;
+		}
+	}
+}
+
+
+/* MOVING PICTURES (not just a great album by Rush) */
+/*
+#wrap {
+    min-width: 1024px;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+	.transition('opacity, visibility', 0.5s, ease, 0.2s);
+	&.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+.movement {
+    position: fixed;
+    width: 100%;
+}
+.touch .movement {
+    position: static;
+}*/
+
+
+/* ACCESSIBILITY (text meant only for screen readers) */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+
+/* MEDIA QUERIES */
+@media (max-width: 900px) {
+	.header {
+		padding-top: 63px;
+		hr {
+			height: 0;
+		}
+	}
+	.logo, .logo__triangle-dark {
+		display: none;
+	}
+	.logo__mobile {
+		display: block;
+	}
+	.navigation {
+		background: @dark;
+		display: none;
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		z-index: 100;
+		.menu-navigation-container {
+			height: 100%;
+			overflow-y: auto;
+			border-spacing: 0;
+			padding-right: 0;
+			display: block;
+			ul {
+				display: block;
+				li {
+					display: block;
+					&:nth-child(3) a {
+						margin-right: 0;
+					}
+					a {
+						color: @white;
+						font-size: 18px;
+						font-size: 1.125rem;
+						padding: 6.56% 10%; /* 21 / 320 */
+						&:hover, &:focus {
+							color: @grey;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@media (max-width: 800px) {
+	.image, .image img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+@media (max-width: 600px) {
+	.footer {
+		padding: 180px 0 30px;
+		.footer__text, .footer__up {
+			display: none;
+		}
+		.footer__fine_print {
+			bottom: 165%;
+			top: auto;
+		}
+	}
+}

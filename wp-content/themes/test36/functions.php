@@ -80,6 +80,13 @@ function test36_setup() {
 endif; // test36_setup
 add_action( 'after_setup_theme', 'test36_setup' );
 
+show_admin_bar( false );
+add_action( 'wp_enqueue_scripts', 'my_deregister_styles', 100 );
+
+function my_deregister_styles() {
+	wp_deregister_style( 'open-sans' );
+}
+
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
@@ -115,9 +122,11 @@ add_action( 'widgets_init', 'test36_widgets_init' );
  */
 function test36_scripts() {
 	wp_enqueue_style( 'test36-style', get_stylesheet_uri() );
-
-	wp_enqueue_script( 'test36-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
-
+	//wp_enqueue_script( 'test36-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+	wp_deregister_script('jquery');
+	wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", false, null);
+	wp_enqueue_script('jquery');
+	wp_enqueue_script( 'test36-main', get_template_directory_uri() . '/js/main.js', array(), '20150815', true );
 	wp_enqueue_script( 'test36-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -125,6 +134,29 @@ function test36_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'test36_scripts' );
+
+/**
+ * Custom text at the end of The Content
+ */
+function custom_content_more() {
+	return '<a class="faded text__more" href="about">[<strong>more</strong>]</a>';
+}
+add_filter('the_content_more_link', 'custom_content_more');
+/**
+ * Custom text at the end of an Excerpt
+ */
+function custom_excerpt_more() {
+	return ' <a class="faded blog-excerpt__more" href="' . get_permalink( get_the_ID() ) . '">[<strong>more</strong>]</a>';
+}
+add_filter('excerpt_more', 'custom_excerpt_more');
+
+/**
+ * How many words make up an Excerpt
+ */
+function custom_excerpt_length($length) {
+	return 23;
+}
+add_filter('excerpt_length', 'custom_excerpt_length', 999);
 
 /**
  * Implement the Custom Header feature.

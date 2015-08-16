@@ -1,7 +1,13 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="text">
-		<?php the_title( '<h1>', '</h1>' ); ?>
-		<?php the_content(); ?>
+		<?php the_title( '<h1>', '</h1>' );
+		if (is_front_page()) {
+			global $more;
+			$more = 0;
+			echo get_the_content();
+		} else {
+			the_content();
+		} ?>
     </div>
 	<?php if (is_front_page()) {
 		// grab all the images attached to page the Works page (id=7)
@@ -49,6 +55,26 @@
 				</div>
 				<?php $cnt++;
 				if ($cnt>7) { break; }
+				if ($cnt==4) {
+					// Show the latest blog post
+					$posts = get_posts('post_type=post&showposts=1');
+					foreach ($posts as $post) {
+						setup_postdata($post); ?>
+                        <section class="blog-excerpt">
+                        	<div class="blog-excerpt__info">
+                                <h4>The Latest</h4>
+                                <h1><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h1>
+                                <div class="endash">&ndash;</div>
+                                <?php the_excerpt(); ?>
+                            </div>
+                            <div class="blog-excerpt__image">
+                            	<?=wp_get_attachment_image(get_post_thumbnail_id($post->ID), 'full');?>
+                            </div>
+                            <div class="clear"></div>
+                        </section>
+					<?php }
+					wp_reset_postdata();
+				}
 				if ($cnt==2 || $cnt==5) {
 					$artists = array();
 					/* Place artists to the right
@@ -62,8 +88,9 @@
 							'numberposts' 	 => 1
 						));
 						$artist = reset($jon);
+						$artist->link = "about";
 					} else {
-						// Next choose one of fellow artists at random
+						// Next choose one of the fellow artists at random
 						$fellow = get_children(array(
 							'post_parent'    => 22,
 							'post_status'    => 'inherit',
@@ -73,9 +100,9 @@
 							'numberposts' 	 => 1
 						));
 						$artist = reset($fellow);
+						$artist->link = "fellow-artists/".$artist->post_name;
 					}
-					if ($artist) {
-						$artist->link = "about/".$artist->post_name; ?>
+					if ($artist) { ?>
                         <div class="image image-artist" data-speed="<?=rand(1, 8)?>" data-movement-speed="<?=rand(1, 8)?>" data-side="right">
                             <div class="image__animate">
                                 <a href="<?=$artist->link?>">

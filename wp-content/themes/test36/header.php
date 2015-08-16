@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" dir="ltr" lang="en"> <!--<![endif]-->
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,15 @@
         <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'test36' ); ?></a>
 
         <header class="header" role="banner">
-            <div class="logo">
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo__box" title="<?php bloginfo( 'name' ); ?>">
-                	<div class="logo__triangle"></div>
-                </a>
-            </div>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" title="<?php bloginfo( 'name' ); ?>" aria-controls="primary-menu" aria-expanded="false" rel="home">
+                <div class="logo__box"><div class="logo__triangle logo__triangle-white"></div></div>
+                <div class="logo__triangle logo__triangle-dark"></div>
+            </a>
+            <div class="logo__mobile"><div class="logo__triangle logo__triangle-white"></div></div>
     
             <nav class="navigation" role="navigation">
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'test36' ); ?></button>
-                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
             </nav>
+            <div class="wrap"><hr /></div>
         </header>
 		<div id="content">

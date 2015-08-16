@@ -11,7 +11,7 @@ module.exports = function(grunt) {
           optimization: 2
         },
         files: {
-          "build/styles.css": "src/styles.less" // destination file and source file
+          "wp-content/themes/test36/style.css": "wp-content/themes/test36/less/styles.less" // destination file and source file
         }
       }
     },
@@ -20,12 +20,12 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: 'wp-content/themes/test36/js/<%= pkg.name %>.js',
+        dest: 'wp-content/themes/test36/final/<%= pkg.name %>.min.js'
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'build/**/*.js'],
+      files: ['Gruntfile.js', 'wp-content/themes/test36/js/**/*.js', 'wp-content/themes/test36/final/**/*.js'],
       options: {
         globals: {
           jQuery: true
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
     },
     watch: {
       styles: {
-        files: ['less/**/*.less'], // which files to watch
+        files: ['wp-content/themes/test36/less/**/*.less'], // which files to watch
         tasks: ['less'],
         options: {
           nospawn: true
@@ -52,11 +52,11 @@ module.exports = function(grunt) {
 
   // Load the plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default tasks
-  grunt.registerTask('default', ['uglify']);
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['uglify','jshint','less','watch']);
 
 };
