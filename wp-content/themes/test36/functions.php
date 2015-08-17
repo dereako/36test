@@ -123,10 +123,11 @@ add_action( 'widgets_init', 'test36_widgets_init' );
 function test36_scripts() {
 	wp_enqueue_style( 'test36-style', get_stylesheet_uri() );
 	//wp_enqueue_script( 'test36-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
-	wp_deregister_script('jquery');
+	/*wp_deregister_script('jquery');
 	wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", false, null);
-	wp_enqueue_script('jquery');
-	wp_enqueue_script( 'test36-main', get_template_directory_uri() . '/js/main.js', array(), '20150815', true );
+	wp_enqueue_script('jquery');*/
+	// minified wp_enqueue_script( 'test36-main', get_template_directory_uri() . '/final/36test.min.js', array(), '20150815', true );
+	wp_enqueue_script( 'test36-main', get_template_directory_uri() . '/js/start.js', array(), '20150815', true );
 	wp_enqueue_script( 'test36-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -149,6 +150,12 @@ function custom_excerpt_more() {
 	return ' <a class="faded blog-excerpt__more" href="' . get_permalink( get_the_ID() ) . '">[<strong>more</strong>]</a>';
 }
 add_filter('excerpt_more', 'custom_excerpt_more');
+
+function randomBG() {
+	$bgs = array('blue','yellow','wood','saw');
+	$max = count($bgs) - 1;
+	return " bg bg-".$bgs[rand(0,$max)];
+}
 
 /**
  * How many words make up an Excerpt

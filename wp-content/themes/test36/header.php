@@ -20,14 +20,16 @@
 
         <header class="header" role="banner">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" title="<?php bloginfo( 'name' ); ?>" aria-controls="primary-menu" aria-expanded="false" rel="home">
-                <div class="logo__box"><div class="logo__triangle logo__triangle-white"></div></div>
-                <div class="logo__triangle logo__triangle-dark"></div>
+                <div class="logo__box<?php echo $logo = randomBG();?>"><div class="logo__triangle logo__triangle-white"></div></div>
+                <div class="logo__triangle logo__triangle-dark<?=$logo?>"></div>
             </a>
-            <div class="logo__mobile"><div class="logo__triangle logo__triangle-white"></div></div>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo__mobile"><div class="logo__triangle logo__triangle-white"></div></a>
     
             <nav class="navigation" role="navigation">
+            	<a class="navigation__close">[<strong>close</strong>]</a>
 				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
             </nav>
+           	<div class="navigation__menu">[<strong>menu</strong>]</div>
             <div class="wrap"><hr /></div>
         </header>
-		<div id="content">
+		<div id="content" class="wrap">

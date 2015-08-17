@@ -10,9 +10,16 @@
                 email: <a href="mailto:jon@apexcreations.com">jon@apexcreations.com</a>
             </div>
             <div class="footer__fine_print">&copy; <?=date('Y')?> APEX CREATIONS. All rights reserved</div>
-            <div class="footer__up faded">[<strong>up</strong>]</div>
+            <a href="#wrap" class="footer__up faded">[<strong>up</strong>]</a>
     	</div>
 	</footer>
+    <svg class="clip-svg">
+        <defs>
+            <clipPath id="clip-svg" clipPathUnits="objectBoundingBox">
+                  <polygon points="0.5 0, 0 1, 1 1, 0.5 0" />
+            </clipPath>
+        </defs>   
+    </svg>
 </div><!-- #wrap -->
 <?php wp_footer(); ?>
 </body>

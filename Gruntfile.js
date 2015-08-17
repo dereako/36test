@@ -25,7 +25,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'wp-content/themes/test36/js/**/*.js', 'wp-content/themes/test36/final/**/*.js'],
+      files: ['Gruntfile.js', 'wp-content/themes/test36/js/**/*.js'],
       options: {
         globals: {
           jQuery: true
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
       },
 	  scripts: {
 		  files: ['<%= jshint.files %>'],
-		  tasks: ['jshint'],
+		  tasks: ['uglify'],
           options: {
 			spawn: false,
 		  },
@@ -57,6 +57,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default tasks
-  grunt.registerTask('default', ['uglify','jshint','less','watch']);
+  grunt.registerTask('default', ['uglify','less','watch']);
 
 };
