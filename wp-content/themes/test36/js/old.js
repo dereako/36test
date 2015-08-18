@@ -3,6 +3,7 @@
 		windowH = $window.height(),
 		windowW = $window.width(),
 		movingBlock = $('.block'),
+		container = $window,
         inertiaWrapper = $('.movement'),
         items = $('[data-speed]'),
         inertiaScrollTop = 0,
@@ -170,7 +171,7 @@
             var container_top = inertiaWrapper.data('top');
             
             container_top += 0.2 * (scrollTop - container_top);
-            c_top = container_top;
+            c_top = -container_top;
         
             inertiaWrapper.css('-moz-transform','translate3d(0,' + c_top + 'px, 0)');
             inertiaWrapper.css('-webkit-transform','translate3d(0,' + c_top + 'px, 0)');
@@ -195,7 +196,7 @@
                 waypointOffsetY = 0,
                 newOffsetY = inertiaScrollTop + windowH/2 - height/2 - offsetTop;
 
-            offsetY = - newOffsetY * speed/20;
+            offsetY = -1 * newOffsetY * speed/20;
 
             // mouse movement
             height = movementSpeed * 10/ windowH;
@@ -211,8 +212,7 @@
 			
             //gallery waypoints
             if (side) {
-				// was negative, -1 *
-                waypointOffset = (offsetTop + offsetY + mouseOffsetY - inertiaScrollTop) / (windowH / 2 - $(this).height() / 2); 
+                waypointOffset = -1 * (offsetTop + offsetY + mouseOffsetY - inertiaScrollTop) / (windowH / 2 - $(this).height()/2);
 				$(this).data('waypoint',offsetY);
                 if (waypointOffset < 0) waypointOffset = 0;
                 if (waypointOffset > 1) waypointOffset = 1;
@@ -299,8 +299,8 @@
             resizeParallax();
             /*if ( windowW < 768)  $('.b-page').css('height', windowH);*/
         });
-		$window.on('scroll', function() {
-            scrollTop = $window.scrollTop();
+		container.on('scroll', function() {
+            scrollTop = container.scrollTop();
             
         });
 		$('body').on('mousewheel', function(e) {

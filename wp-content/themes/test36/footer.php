@@ -10,7 +10,7 @@
                 email: <a href="mailto:jon@apexcreations.com">jon@apexcreations.com</a>
             </div>
             <div class="footer__fine_print">&copy; <?=date('Y')?> APEX CREATIONS. All rights reserved</div>
-            <a href="#wrap" class="footer__up faded">[<strong>up</strong>]</a>
+            <div class="footer__up faded">[<strong>up</strong>]</div>
     	</div>
 	</footer>
     <svg class="clip-svg">

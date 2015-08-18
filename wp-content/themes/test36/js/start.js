@@ -7,7 +7,7 @@
     "use strict";
 
     var defaultCDN = 'google', // yandex || google || local
-        baseDefault = 'wp-content/themes/test36/js/',
+        baseDefault = '/36test/wp-content/themes/test36/js/',
 
         libVersion = {
             jQuery: (window.isMsIe !== 'undefined' && window.isMsIe < 9) ? '1.10.2' : '2.1.4',
