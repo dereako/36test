@@ -42,7 +42,7 @@ module.exports = function(grunt) {
       },
 	  scripts: {
 		  files: ['<%= jshint.files %>'],
-		  tasks: ['uglify'],
+		  tasks: ['uglify','jshint'],
           options: {
 			spawn: false,
 		  },
@@ -57,6 +57,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default tasks
-  grunt.registerTask('default', ['uglify','less','watch']);
+  grunt.registerTask('default', ['uglify','jshint','less','watch']);
 
 };

@@ -86,6 +86,7 @@ body {
 	&.locked {
 		position: fixed;
 		overflow: hidden;
+		width: 100%;
 	}
 }
 
@@ -124,6 +125,9 @@ ul,
 li {
 	margin: 0px;
 	padding: 0px;
+}
+label {
+	display: block;
 }
 
 
@@ -427,7 +431,7 @@ h1,
 }
 
 .footer {
-	padding: 218px 0 90px;
+	padding: 10% 0 90px;
 	.wrap {
 		box-sizing: border-box;
 		padding-right: 10%;
@@ -470,8 +474,13 @@ h1,
 .container {
     position: relative;
 }
-.touch .movement {
-    position: static;
+.touch {
+	.movement {
+		position: static;
+	}
+	.block {
+		opacity: 1;
+	}
 }
 .block__animate {
 	line-height: 0;
@@ -539,12 +548,9 @@ h1,
 
 .block {
     position: absolute;
-	/*opacity: 0;*/
-	.block__info {
-		padding-top: 20px;
-		.left {
-			width: 140px;
-		}
+	opacity: 0;
+	&.visible {
+		opacity: 1;
 	}
 	&.image-artist {
 		.block__animate {
@@ -554,16 +560,21 @@ h1,
 		.block__info {
 			float: left;
 			padding: 0 0 0 4%;
-			width: 140px;
+			width: 34%;
 		}
 	}
 	&[data-side=left] {
-		.transition(~"left, margin-top, opacity", 0.8s);
 		left: 0;
 	}
 	&[data-side=right] {
-		.transition(~"right, margin-top, opacity", 0.8s);
 		right: 0;
+	}
+	.block__info {
+		padding-top: 20px;
+		.left {
+			width: 34%;
+			max-width: 140px;
+		}
 	}
 }
 
@@ -591,38 +602,38 @@ h1,
 	}
 }
 
-/* BLOCKS (need some hard-coded styles at this point) */
+/* BLOCKS */
 #block-0,
 #block-1 {
 	top: 0;
 }
 #block-2 {
-	top: 386px;
+	top: 300px;
 }
 #block-3 {
-	top: 546px;
+	top: 480px;
 }
 #block-4 {
-	top: 996px;
+	top: 800px;
 }
 #block-5 {
-	top: 850px;
+	top: 750px;
 }
 #block-6 {
-	top: 1546px;
+	top: 1246px;
 }
 #block-7,
 #block-8 {
-	top: 2060px;
+	top: 1660px;
 }
 #block-9 {
-	top: 2330px;
+	top: 1950px;
 }
 
 #block-1,
 #block-4,
 #block-7 {
-	max-width: 56%;
+	max-width: 54%;
 	img {
 		max-width: 100%;
 		height: auto;
@@ -856,7 +867,7 @@ h1,
 			overflow: hidden;
 			img {
 				bottom: -200%;
-				margin: auto;
+				margin: auto 0;
 				position: absolute;
 				left: 0;
 				right: 0;
@@ -874,6 +885,7 @@ h1,
 		}
 	}
 	.text {
+		width: 100%;
 		padding: 2% 0 10%;
 	}
 }
@@ -895,8 +907,9 @@ h1,
 }
 
 @media (max-width: 500px) {
-	.image.image-artist {
+	.block.image.image-artist {
 		.block__animate {
+			max-width: 100%;
 			width: 100%;
 			padding-bottom: 56.25%; /* 180 / 320 */
 			overflow: hidden;
@@ -922,6 +935,76 @@ h1,
 	}
 	.text {
 		padding: 0 0 16%;
+	}
+}
+
+@media (min-width: 1400px) {
+	html {
+		font-size: 150%;
+	}
+	#block-0,
+	#block-1 {
+		top: 0;
+	}
+	#block-2 {
+		top: 386px;
+	}
+	#block-3 {
+		top: 546px;
+	}
+	#block-4 {
+		top: 996px;
+	}
+	#block-5 {
+		top: 850px;
+	}
+	#block-6 {
+		top: 1546px;
+	}
+	#block-7,
+	#block-8 {
+		top: 2060px;
+	}
+	#block-9 {
+		top: 2330px;
+	}
+	.block {
+		.block__animate .block__bracket.right {
+			margin-left: 48px;
+		}
+		.block__info {
+			.left {
+				max-width: 300px;
+			}
+		}
+	}
+}
+@media (min-width: 1800px) {
+	#block-0,
+	#block-1 {
+		top: 0;
+	}
+	#block-2 {
+		top: 386px;
+	}
+	#block-3 {
+		top: 666px;
+	}
+	#block-4 {
+		top: 996px;
+	}
+	#block-5 {
+		top: 890px;
+	}
+	#block-6 {
+		top: 1546px;
+	}
+	#block-7,
+	#block-8 {
+		top: 2260px;
+	}
+	#block-9 {
+		top: 2500px;
 	}
 }
 

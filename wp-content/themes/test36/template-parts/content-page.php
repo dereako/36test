@@ -1,5 +1,5 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="text" id="block-0" data-speed="1" data-movement-speed="1" data-side="left">
+	<div class="block text" id="block-0" data-speed="1" data-movement-speed="1" data-side="left">
 		<?php the_title( '<h1>', '</h1>' ); ?>
         <div class="endash">&ndash;</div>
 		<?php if (is_front_page()) {

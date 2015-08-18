@@ -1,4 +1,9 @@
-
+$(function() {
+	/* 3 jQuery dependencies were loaded from plugins.js:
+	       -QueryLoader v2.9.0
+		   -Waypoints v2.0.4
+		   -Mousewheel v3.1.11
+	 */
 	var $window = $(window),
 		windowH = $window.height(),
 		windowW = $window.width(),
@@ -14,7 +19,7 @@
         isTouchDevice,
 		draw;
 
-	/* Trigger the animations needed for the sticky nav transitions */
+	// Trigger the animations needed for the sticky nav transitions
 	$window.on('scroll', function(e) {
     	if ($window.scrollTop() >= 16) {
         	$('.logo__triangle-white').addClass('stick');
@@ -33,18 +38,16 @@
         }
 	});
 	
-	
+	// Initialize the parallax effect
     buildParallax = function() {
         resizeParallax();
-		
         var $scrollTop = 0;
-		/*var $scrollTop = inertiaWrapper.height() - windowH;*/
-
         inertiaWrapper.data('top', 0);
 
         items.each(function( indx ) {
            $(this).data("height", $(this).innerHeight());
            $(this).data("offset-top", $(this).offset().top - $(window).scrollTop());
+           $(this).data("opacity", 0);
            $(this).data("offset-x", 0); 
            $(this).data("offset-y", 0);
            $(this).data("mouse-offset-x", 0);
@@ -52,12 +55,10 @@
         });
 
         window.scrollTo(0, $scrollTop);
-		
         inertiaScrollTop = scrollTop = $scrollTop;
 
         if (!isMobile) {
-			/* use the height? */
-			inHeight = inertiaWrapper.height();
+			inHeight = inertiaWrapper.height() - windowH/2;
             inertiaWrapper.css('-moz-transform','translate3d(0,-' + inHeight + 'px, 0)');
             inertiaWrapper.css('-webkit-transform','translate3d(0,-' + inHeight + 'px, 0)');
             inertiaWrapper.css('-o-transform','translate3d(0,-' + inHeight + 'px, 0)');
@@ -74,9 +75,9 @@
                     mouseOffsetX = $(this).data("mouse-offset-x"),
                     mouseOffsetY = $(this).data("mouse-offset-y"),
                     offsetY = $(this).data("offset-y"),
-                    newOffsetY = $scrollTop + windowH/2 - height/2 - offsetTop;
-    			/* no longer negative -1 * */
-                offsetY = newOffsetY * speed/20;
+                    newOffsetY = $scrollTop - windowH/2 - height/2 - offsetTop;
+					
+                offsetY = -1 * newOffsetY * speed/20;
                
                 if (Modernizr.csstransforms3d) {
                     $(this).css('-moz-transform','translate3d(0px, ' + offsetY + 'px, 0)');
@@ -99,67 +100,26 @@
         }
     };
 
+	// Adjust dimensions when the window's size changes
     resizeParallax = function() {
         windowH = $(window).height();
         windowW = $(window).width();
-		if ($('.container').length && $('.block').length) {
-			containerEnd = $('.block:last-child').offset().top + $('.block:last-child').height();
-			$('.container').height(containerEnd);
-		}
-        /* COME BACK!
-		$('.container').height($('.b-image__img_head').height() + $('.b-image__img_tiles').height() + $('.b-image__img_camera').height() + $('.b-image__img_drawings').height() + $('.b-image__img_wood').height());
-        $('.b-page').css('height', windowH);
-        scrollIndicate.css('overflow', 'visible');
-        scrollIndicate.css('height', windowH/2);
-        scrollIndicate.css('top', (-windowH/4)-10);
-        $('.b-page_4 .b-scroll-indicate').css({
-            'height': windowH/2 + 200,
-            'top': -(windowH/4) - 210
-        });
-        $('.b-scroll-indicate_second').css({
-            'height': $('.b-image__img_head').height() + $('.b-image__img_tiles').height() + $('.b-image__img_camera').height() + $('.b-image__img_drawings').height() + $('.b-image__img_wood').height() + windowH/4 - 250 ,  
-            'top': 'auto',
-            'bottom': 250
-        });
-        $('.b-scroll-indicate_first').css({
-            'height': windowH/2 ,
-            'top': (-windowH/4)-10
-        });*/
         if (windowW < 840) {
             $('.container').css('height', '100%');
-		}/*
-            $('.b-scroll-indicate_second').css({
-                'height': $('.b-images-container').height(),
-                'bottom': 150
-            });
-        }
-        if (windowH < 860) {
-            $('.b-scroll-indicate_first').css({
-                'height': windowH/2 -40,
-                'top': (-windowH/4)-10 +40
-            });
-        }
-        if (windowH < 700) {
-            $('.b-scroll-indicate_first').css({
-                'height': windowH/2 -60,
-                'top': (-windowH/4)-10 +60
-            });
-        }
-
-        if (windowH < 580) {
-            $('.b-scroll-indicate_first').css({
-                'height': windowH/2 -90,
-                'top': (-windowH/4)-10 +90
-            });
-        }
-        $('.b-page_5 .b-text-block').css('top', windowH/2 - $('.b-page_5 .b-text-block').innerHeight()/2); */
+		} else {
+			if ($('.container').length && $('.block').length) {
+				containerEnd = $('.block:last-child').offset().top + $('.block:last-child').height();
+				$('.container').height(containerEnd);
+			}
+		}
         $('.main').height(inertiaWrapper.height());
 	};
 	
+	// Main parallax control, updated constantly
     updateParallax = function() {
         var scrollDiff;
     
-        inertiaScrollTop += 0.05 * (scrollTop - inertiaScrollTop);
+        inertiaScrollTop += 0.05 * (scrollTop - inertiaScrollTop + windowH/2);
         scrollDiff = inertiaScrollTop - scrollTop;
 
         if (Math.abs(scrollDiff) < 0.01) {
@@ -170,7 +130,7 @@
             var container_top = inertiaWrapper.data('top');
             
             container_top += 0.2 * (scrollTop - container_top);
-            c_top = container_top;
+            c_top = -container_top;
         
             inertiaWrapper.css('-moz-transform','translate3d(0,' + c_top + 'px, 0)');
             inertiaWrapper.css('-webkit-transform','translate3d(0,' + c_top + 'px, 0)');
@@ -180,12 +140,13 @@
             inertiaWrapper.data('top', container_top);
         }
     
-        items.each(function( indx ) {
+        items.each(function(indx) {
             var offsetX = 0,
                 speed = $(this).data('speed'),
                 movementSpeed = $(this).data('movement-speed'),
                 height = $(this).data('height'),
                 offsetTop = $(this).data("offset-top"),
+                opacity = $(this).data("opacity"),
                 mouseOffsetX = $(this).data("mouse-offset-x"),
                 mouseOffsetY = $(this).data("mouse-offset-y"),
                 offsetY = $(this).data("offset-y"),
@@ -193,7 +154,7 @@
                 waypointOffset,
                 waypointOffsetX = 0,
                 waypointOffsetY = 0,
-                newOffsetY = inertiaScrollTop + windowH/2 - height/2 - offsetTop;
+                newOffsetY = inertiaScrollTop - windowH/2 - height/2 - offsetTop;
 
             offsetY = - newOffsetY * speed/20;
 
@@ -209,19 +170,27 @@
             mouseOffsetY += (newOffsetY - mouseOffsetY)/ 20;
 			
 			
-            //gallery waypoints
+            // Waypoints
             if (side) {
-				// was negative, -1 *
-                waypointOffset = (offsetTop + offsetY + mouseOffsetY - inertiaScrollTop) / (windowH / 2 - $(this).height() / 2); 
-				$(this).data('waypoint',offsetY);
-                if (waypointOffset < 0) waypointOffset = 0;
-                if (waypointOffset > 1) waypointOffset = 1;
-                if (side === 'right') waypointOffsetX = (windowW/2 + 500) * waypointOffset;
-                if (side === 'left') waypointOffsetX = -((windowW/2 + 500) * waypointOffset);
+                waypointOffset = (offsetTop + offsetY + mouseOffsetY - inertiaScrollTop) / (windowH / 2 - height / 2); 
+				if (waypointOffset < 0) {
+					waypointOffset = 0;
+				} else if (waypointOffset > 1) {
+					waypointOffset = 1;
+				}
+				// From the bottom instead of sides
+                waypointOffsetY = (windowH/2 + height) * waypointOffset;
             }
-
             offsetX = mouseOffsetX + waypointOffsetX;
             offsetY = offsetY + mouseOffsetY + waypointOffsetY;
+			
+			// Fade in
+			if (opacity < 1) {
+				if (offsetTop < scrollTop + windowH) {
+					$(this).css('opacity', 1-waypointOffset);
+				}
+			}
+			
             if (Modernizr.csstransforms3d) {
                 $(this).css('-moz-transform','translate3d(' + offsetX +'px, ' + offsetY + 'px, 0)');
                 $(this).css('-webkit-transform','translate3d(' + offsetX +'px, ' + offsetY + 'px, 0)');
@@ -237,9 +206,12 @@
             $(this).data("mouse-offset-x", mouseOffsetX);
             $(this).data("mouse-offset-y", mouseOffsetY);
             $(this).data("offset-y", offsetY);
+            $(this).data("offsetTop", offsetTop);
+            $(this).data("opacity", opacity);
 		});
     };
 
+	// Load all images first
     initQueryLoader = function() {
 		if ($('img').length) {
 			$("body").queryLoader2({
@@ -247,7 +219,7 @@
 				barColor: '#333',
 				barHeight: 6,
 				onComplete: function() {
-					/* $scrollTop = inertiaWrapper.height() - windowH; */
+					// Always start at the top
 					window.scrollTo(0, 0);
 					$('#wrap').addClass('visible');
 					mouseWheel = true;
@@ -256,25 +228,20 @@
 		} else {
 			$('#wrap').addClass('visible');
 		}
-    }
+    };
 	
     preparePage = function() {
         if (!Modernizr.csstransforms3d) {
             $('.movement').css('position', 'absolute');
         }
-		/*
-        $('.b-page').css('height', windowH);
-        $scrollTop = inertiaWrapper.height() - windowH;
-        window.scrollTo(0, $scrollTop);
-		*/
     };
 
     draw = function() {
-        if (windowW > 820) {
+        if (windowW > 840) {
             updateParallax();
         }
-        requestAnimFrame( draw );
-    } 
+        requestAnimFrame(draw);
+    };
 
     isTouchDevice = function(){
         return "ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch;
@@ -290,23 +257,23 @@
             };
 	})();
 	
+	// Start everything off, like a document.ready
 	init = function() {
+		// Set up listeners
         $('body').on('mousemove', function(e) {
             mouseX = e.screenX;
             mouseY = e.screenY;
-        });
-		$(window).on('resize', function() {
-            resizeParallax();
-            /*if ( windowW < 768)  $('.b-page').css('height', windowH);*/
-        });
-		$window.on('scroll', function() {
-            scrollTop = $window.scrollTop();
-            
         });
 		$('body').on('mousewheel', function(e) {
             if (!mouseWheel) {
                 e.preventDefault();
             }
+        });
+		$window.on('resize', function() {
+            resizeParallax();
+        });
+		$window.on('scroll', function() {
+            scrollTop = $window.scrollTop();
         });
 		
 		isTouchDevice = isTouchDevice();
@@ -314,20 +281,21 @@
         buildParallax();
 		initQueryLoader();
 		
+		// Clicking navigation animations
 		$('.navigation__menu, .navigation__close').on('click', function() {
 			$('body').toggleClass('locked');
 			$('.logo__mobile').toggleClass('open');
 			$('.navigation').toggleClass('open');
 		});
-		
 		$('.navigation a').hover(function() {
 			$('.navigation a').not(this).toggleClass('light');
 		});
 		
+		// Back to top
 		$('.footer__up').on('click', function() {
 			$('html, body').animate({'scrollTop': 0}, 1000);
-			return false; // no JS fallback uses anchors
 		});
 	};
 	
 	init();
+});
