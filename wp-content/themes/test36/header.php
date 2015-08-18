@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" dir="ltr" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" dir="ltr" lang="en" xmlns:svg="http://www.w3.org/2000/svg"> <!--<![endif]-->
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +21,7 @@
         <header class="header" role="banner">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" title="<?php bloginfo( 'name' ); ?>" aria-controls="primary-menu" aria-expanded="false" rel="home">
                 <div class="logo__box<?php echo $logo = randomBG();?>"><div class="logo__triangle logo__triangle-white"></div></div>
-                <div class="logo__triangle logo__triangle-dark<?=$logo?>"></div>
+                <div class="logo__clip"><div class="logo__dark<?=$logo?>"></div></div>
             </a>
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo__mobile"><div class="logo__triangle logo__triangle-white"></div></a>
     

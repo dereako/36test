@@ -15,8 +15,8 @@
 	</footer>
     <svg class="clip-svg">
         <defs>
-            <clipPath id="clip-svg" clipPathUnits="objectBoundingBox">
-                  <polygon points="0.5 0, 0 1, 1 1, 0.5 0" />
+            <clipPath id="clip-shape" clipPathUnits="objectBoundingBox">
+            	<polygon points="0 0.87, 0.5 0, 0.5 0, 1 0.87" />
             </clipPath>
         </defs>   
     </svg>
