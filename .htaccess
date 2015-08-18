@@ -16,3 +16,11 @@ RewriteRule . /36test/index.php [L]
 order deny,allow
 </FilesMatch>
 # END Brute Force Login Protection
+
+
+AddType image/svg+xml svg
+AddType image/svg+xml svgz
+
+<ifModule mod_headers.c>
+    Header set Connection keep-alive
+</ifModule>
