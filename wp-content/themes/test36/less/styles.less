@@ -839,7 +839,7 @@ h1,
 		position: relative !important;
 		top: 0 !important;
 		max-width: 100% !important;
-		opacity: 1;
+		opacity: 1 !important;
 		height: auto;
 		.blog-excerpt__info {
 			float: none;
@@ -1005,9 +1005,73 @@ h1,
 	}
 }
 
+
 /* RETINA DISPLAYS */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
 	.share .share__icon {
 		background-image: url('img/share@2x.png');
+	}
+}
+
+
+/* PRINT STYLES */
+@media print {
+	body,
+	#wrap,
+	#content,
+	.main,
+	.movement,
+	.wrap {
+	   width: 100%;
+	   margin: 0;
+	   float: none;
+	   color: #000;
+	   background: #fff url(none);
+	}
+	.header,
+	.share,
+	.footer .footer__up,
+	.navigation__menu,
+	.clip-svg {
+	   display: none;
+	   height: 0;
+	}
+	.footer,
+	.footer .wrap {
+		box-sizing: content-box;
+		width: 100%;
+		padding: 0;
+	}
+	.footer__fine_print {
+		-webkit-transform: none !important;
+		transform: none !important;
+		color: #000;
+		position: relative;
+		top: 0;
+		right: 0;
+	}
+	.block {
+		opacity: 1 !important;
+		top: 0;
+		position: relative;
+		.block__info .left {
+			width: 100%;
+			max-width: 100%;
+		}
+	}
+	.blog-excerpt__image {
+		display: none;
+	}
+	.movement,
+	.container,
+	#wrap,
+	.main {
+		position: relative !important;
+		height: auto !important;
+	}
+	a:link,
+	a:visited {
+	   color: #000;
+	   font-weight: bold;
 	}
 }
