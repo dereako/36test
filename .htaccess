@@ -1,4 +1,3 @@
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -14,6 +13,7 @@ RewriteRule . /36test/index.php [L]
 # BEGIN Brute Force Login Protection
 <FilesMatch ".*\.(php|html?|css|js|jpe?g|png|gif)$">
 order deny,allow
+		Header set Cache-Control "max-age=290304000, public"
 </FilesMatch>
 # END Brute Force Login Protection
 
@@ -21,6 +21,12 @@ order deny,allow
 AddType image/svg+xml svg
 AddType image/svg+xml svgz
 
+
 <ifModule mod_headers.c>
     Header set Connection keep-alive
+	ExpiresActive On
+
+	<FilesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|js|html|htm|css|swf)$">
+		Header set Cache-Control "max-age=290304000, public"
+	</FilesMatch>
 </ifModule>

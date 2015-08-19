@@ -57,6 +57,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default tasks
-  grunt.registerTask('default', ['uglify','less','watch']);
+  grunt.registerTask('default', ['uglify','less','watch']); // had to remove ,'jshint' because it hated the minified code
 
 };

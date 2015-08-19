@@ -2,16 +2,14 @@
   "name": "36test",
   "version": "0.1.0",
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-watch": "^0.6.1"
   },
   "description": "I want to show 36creative my front end skills",
   "main": "Gruntfile.js",
-  "dependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-uglify": "^0.9.1",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-less": "^1.0.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dereako/36test.git"

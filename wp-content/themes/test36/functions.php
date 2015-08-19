@@ -117,6 +117,14 @@ function test36_widgets_init() {
 }
 add_action( 'widgets_init', 'test36_widgets_init' );
 
+// Make scripts load asynchronously
+add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
+function add_defer_attribute($tag, $handle) {
+    if ('test36-main' !== $handle)
+        return $tag;
+    return str_replace( ' src', ' async="async" src', $tag );
+}
+
 /**
  * Enqueue scripts and styles.
  */
@@ -128,7 +136,7 @@ function test36_scripts() {
 	wp_enqueue_script('jquery');*/
 	
 	/* minified script for production environment */
-	wp_enqueue_script('test36-main', get_template_directory_uri() . '/final/start.min.js', array(), '20150818', true);
+	wp_enqueue_script('test36-main', get_template_directory_uri() . '/final/start.min.js', array(), '', true);
 	
 	/* uncompressed for development environment 
 	wp_enqueue_script('test36-main', get_template_directory_uri() . '/js/start.js', array(), '20150818', true);

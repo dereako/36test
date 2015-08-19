@@ -14,17 +14,6 @@
 @dark: #333;
 
 /* FUNCTIONS */
-/** REMOVE**/
-.gradient(@start: @dark, @stop: @white, @perc: 50%) {
-	background: @stop;
-	background: -moz-linear-gradient(left, @start 0%, @stop @perc, @stop 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,@start), color-stop(@perc,@stop), color-stop(100%,@stop));
-	background: -webkit-linear-gradient(left, @start 0%,@stop @perc,@stop 100%);
-	background: -o-linear-gradient(left, @start 0%,@stop @perc,@stop 100%);
-	background: -ms-linear-gradient(left, @start 0%,@stop @perc,@stop 100%);
-	background: linear-gradient(to right, @start 0%,@stop @perc,@stop 100%);
-	filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='@d', endColorstr='@d', GradientType=1)",@start,@stop));
-}
 .rotate(@deg: 90deg) {
 	-webkit-transform: rotate(@deg);
 	-moz-transform: rotate(@deg);
@@ -33,7 +22,7 @@
 	transform: rotate(@deg);
 }
 
-.transition(@property, @duration, @ease: ease, @delay: 0) {
+.transition(@property, @duration, @ease: ease, @delay: 0s) {
 	-webkit-transition-property: @property;  
 	-webkit-transition-duration: @duration;
 	-webkit-transition-timing-function: @ease;
@@ -73,10 +62,10 @@ body {
 	background: -o-linear-gradient(left, @barely 0%,@barely 50%,@white 50%,@white 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(left, @barely 0%,@barely 50%,@white 50%,@white 100%); /* IE10+ */
 	background: linear-gradient(to right, @barely 0%,@barely 50%,@white 50%,@white 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@barely', endColorstr='@white',GradientType=1 ); /* IE6-9 */
+	filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@{barely}', endColorstr='@{white}',GradientType=1 )"; /* IE6-9 */
 
 	color: @dark;
-	font-family: Arial, Helvetica sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px; /* pixels fallback for no-rem browsers */
 	font-size: 1rem; /* always in relation to html, so 16/16 */
     -webkit-font-smoothing: antialiased;
@@ -302,9 +291,9 @@ h1,
 	margin-left: -20px;
 	position: fixed;
 	-webkit-clip-path: url('/36test/#clip-shape');
-	-webkit-clip-path: polygon(0% 87%, 50% 0%, 50% 0%, 100% 87%); /* works better for webkit */
 	clip-path: polygon(0% 87%, 50% 0%, 50% 0%, 100% 87%);
 	clip-path: url('/36test/#clip-shape'); /* only way to do it in Firefox */
+	-webkit-clip-path: polygon(0% 87%, 50% 0%, 50% 0%, 100% 87%); /* works better for webkit */
 	.logo__dark {
 		background: @dark;
 		width: 100%;
@@ -457,6 +446,7 @@ h1,
 		position: absolute;
 		right: 15px;
 		top: 9px;
+	    -webkit-transform-origin: 100% 0;
 	    transform-origin: 100% 0;
 	}
 	.footer__up {
